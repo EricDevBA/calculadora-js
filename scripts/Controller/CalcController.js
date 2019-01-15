@@ -23,7 +23,7 @@
      }
 
 
-     addEventListenerAll(elements, events, fn) {
+     addEventListenerAll(elements, events, fn) {  //Método para cada elemento ter seu evento! Utilizando o Split,ele me retorna um Array
 
          events.split(' ').forEach(event => {
              elements.addEventListener(event, fn, false);
