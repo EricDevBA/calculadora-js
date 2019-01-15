@@ -13,7 +13,7 @@
 
          this.setDisplayDateTime(); //Chamando o método
 
-         setInterval(() => {  //Intervalo, a cada 1000 milissegundos
+         setInterval(() => { //Intervalo, a cada 1000 milissegundos
 
              this.setDisplayDateTime();
 
@@ -21,7 +21,7 @@
 
      }
 
-     setDisplayDateTime() {  //Método para data e hora incluindo segundos em tempo real
+     setDisplayDateTime() { //Método para data e hora incluindo segundos em tempo real
          this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
          this.displayDate = this.currentDate.toLocaleDateString(this._locale);
 
