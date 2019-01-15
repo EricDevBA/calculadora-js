@@ -4,8 +4,9 @@
          this._locale = 'pt-BR';
          this._displayCalcEl = document.querySelector("#display");
          this._dateEl = document.querySelector("#data");
-         this._timeEl = document.querySelector('#hora');
+         this._timeEl = document.querySelector("#hora");
          this._currentDate;
+         this.initButtonsEvents();
          this.initialize();
      }
 
@@ -20,6 +21,42 @@
          }, 1000);
 
      }
+
+
+     addEventListenerAll(elements, events, fn) {
+
+         events.split(' ').forEach(event => {
+             elements.addEventListener(event, fn, false);
+
+         });
+
+
+     }
+
+     initButtonsEvents() { // Eventos do botão
+         let buttons = document.querySelectorAll("#buttons > g, #parts > g");
+
+         buttons.forEach((btn, index) => {
+
+             // Eventos do mouse/,interações do usuário
+             this.addEventListenerAll(btn, 'click drag mouseover', e => {
+                 console.log(btn.className.baseVal.replace('btn-', ''));
+
+             });
+
+             this.addEventListenerAll(btn, 'mouseover mouseup mousedown', e => {
+                 btn.style.cursor = 'pointer';
+
+             });
+
+
+         });
+
+
+     }
+
+
+
 
      setDisplayDateTime() { //Método para data e hora incluindo segundos em tempo real
          this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
