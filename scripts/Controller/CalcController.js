@@ -62,15 +62,16 @@
 
      pushOperation(value) {
 
-         if (this._operation.length > 3) {
+         this._operation.push(value);
 
-             let last = this._operation.pop();
+         if (this._operation.length > 3) {
 
              this.calc()
 
          }
 
      }
+     
      calc() {
          let last = this._operation.pop();
          let result = eval(this._operation.join(""));
@@ -83,7 +84,7 @@
      setLastNumberToDisplay() {
          let lastNumber;
 
-         for (let i = this._operation.length-1; i >= 0; i--) {
+         for (let i = this._operation.length - 1; i >= 0; i--) {
 
              if (!this.isOperation(this._operation[i])) {
                  lastNumber = this._operation[i];
@@ -92,7 +93,7 @@
              }
 
          }
-         
+
          this.displayCalc = lastNumber;
 
 
