@@ -21,6 +21,9 @@
 
          }, 1000);
 
+         this.setLastNumberToDisplay();
+
+
      }
 
 
@@ -37,10 +40,15 @@
      clearAll() {
          this._operation = [];
 
+         this.setLastNumberToDisplay();
+
      }
 
      clearEntry() {
          this._operation.pop();
+         this.setLastNumberToDisplay();
+
+
      }
 
      getLastOperation() {
@@ -73,9 +81,31 @@
      }
      
      calc() {
-         let last = this._operation.pop();
+
+        let last = '';
+
+          if (this._operation.length > 3){
+
+              let last = this._operation.pop();
+
+          }  
+
          let result = eval(this._operation.join(""));
-         this._operation = [result, last];
+
+        if (last ==  '%') { // Tratando o botão "%" (porcentagem)
+
+            result /= 100;  //variavael igual a ela mesma
+
+            this._operation = [result];
+            
+        } else {
+            
+        this._operation = [result];
+        if(last) this._operation.push(value);
+
+            
+        }
+
          this.setLastNumberToDisplay();
 
      }
@@ -93,6 +123,8 @@
              }
 
          }
+
+         if(!lastNumber) lastNumber = 0;
 
          this.displayCalc = lastNumber;
 
@@ -175,6 +207,7 @@
                  break;
 
              case 'igual':
+            this.calc();
                  break;
 
              case 'ponto':
