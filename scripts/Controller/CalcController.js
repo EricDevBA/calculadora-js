@@ -83,9 +83,9 @@
 
      }
 
-     getResult() { //Retorna o Eval da operação
-
-         return eval(this._operation.join(""));
+     getResult() //Retorna o Eval da operação
+     {
+        return eval(this._operation.join(""));
      }
 
      calc() {
@@ -94,7 +94,7 @@
 
          this._lastOperator = this.getLastItem();
 
-         if (this._operation < 3) {
+         if (this._operation.length < 3) { //Número de Operações (Se for menor...)
 
              let firstItem = this._operation[0];
              this._operation = [firstItem, this._lastOperator, this.lastNumber];
@@ -102,12 +102,12 @@
 
          }
 
-         if (this._operation.length > 3) {
+         if (this._operation.length > 3) { //Se for maior 
              last = this._operation.pop();
 
              this._lastNumber = this.getResult();
 
-         } else if (this._operation.length == 3) {
+         } else if (this._operation.length == 3) { //Se for igual
 
              this._lastNumber = this.getLastItem(false);
 
@@ -154,7 +154,7 @@
 
          if (!lastItem) {
 
-            lastItem = (isOperation) ? this._lastOperator : this.lastNumber;
+             lastItem = (isOperation) ? this._lastOperator : this.lastNumber;
 
          }
 
@@ -217,7 +217,7 @@
      }
 
 
-     execBtn(value) {
+     execBtn(value) { //Tratamento dos botões da calculadora através dos switch cases
          switch (value) {
              case 'ac':
                  this.clearAll();
