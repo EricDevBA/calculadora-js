@@ -77,7 +77,7 @@
 
          if (this._operation.length > 3) {
 
-             this.calc()
+             this.calc();
 
          }
 
@@ -97,7 +97,7 @@
          if (this._operation.length < 3) { //Número de Operações (Se for menor...)
 
              let firstItem = this._operation[0];
-             this._operation = [firstItem, this._lastOperator, this.lastNumber];
+             this._operation = [firstItem, this._lastOperator, this._lastNumber];
 
 
          }
@@ -128,7 +128,7 @@
          } else {
 
              this._operation = [result];
-             if (last) this._operation.push(value);
+             if (last) this._operation.push(last);
 
 
          }
