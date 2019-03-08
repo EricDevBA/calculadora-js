@@ -196,7 +196,7 @@
              } else {
 
                  let newValue = this.getLastOperation().toString() + value.toString();
-                 this.setLastOperation(parseFloat(newValue));
+                 this.setLastOperation(newValue);
                  this.setLastNumberToDisplay();
 
 
@@ -212,9 +212,11 @@
 
      }
 
-     addDot() {
+     addDot() {  //Metodo para adicionar o ponto na calculadora
 
          let lastOperation = this.getLastOperation();
+
+         if(typeof lastOperation === 'string' && lastOperation.split('').indexOf('.') > -1) return;
 
          if (isNaN(this.isOperation(lastOperation) || !lastOperation)) {
              this.pushOperation('0.');
