@@ -85,7 +85,7 @@
 
      getResult() //Retorna o Eval da operação
      {
-        return eval(this._operation.join(""));
+         return eval(this._operation.join(""));
      }
 
      calc() {
@@ -181,10 +181,6 @@
 
                  this.setLastOperation(value);
 
-             } else if (isNaN(value)) {
-
-                 console.log('Outra coisa', value);
-
              } else {
                  this.pushOperation(value);
                  this.setLastNumberToDisplay();
@@ -200,7 +196,7 @@
              } else {
 
                  let newValue = this.getLastOperation().toString() + value.toString();
-                 this.setLastOperation(parseInt(newValue));
+                 this.setLastOperation(parseFloat(newValue));
                  this.setLastNumberToDisplay();
 
 
@@ -213,6 +209,21 @@
 
      setError() {
          this.displayCalc = 'ERROR';
+
+     }
+
+     addDot() {
+
+         let lastOperation = this.getLastOperation();
+
+         if (isNaN(this.isOperation(lastOperation) || !lastOperation)) {
+             this.pushOperation('0.');
+         } else {
+             this.setLastOperation(lastOperation.toString() + '.');
+
+         }
+
+         this.setLastNumberToDisplay();
 
      }
 
@@ -252,7 +263,7 @@
                  break;
 
              case 'ponto':
-                 this.addOperation('.')
+                 this.addDot();
                  break;
 
 
