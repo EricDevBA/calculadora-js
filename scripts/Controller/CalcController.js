@@ -11,6 +11,7 @@
          this._timeEl = document.querySelector("#hora");
          this._currentDate;
          this.initButtonsEvents();
+         this.initKeyboard();
          this.initialize();
      }
 
@@ -27,6 +28,14 @@
          this.setLastNumberToDisplay();
 
 
+     }
+
+     initKeyboard() {
+
+        document.addEventListener('keyup', e=> {
+            console.log(e.key);
+        
+        });
      }
 
 
