@@ -30,13 +30,56 @@
 
      }
 
-     initKeyboard() {
+     initKeyboard() { //Eventos do teclado
 
-        document.addEventListener('keyup', e=> {
-            console.log(e.key);
-        
-        });
+         document.addEventListener('keyup', e => {
+
+             switch (e.key) {
+                 case 'Escape':
+                     this.clearAll();
+                     break;
+
+                 case 'Backspace':
+                     this.clearEntry();
+                     break;
+
+                 case '+':
+                 case '-':
+                 case '/':
+                 case '*':
+                 case '%':
+                     this.addOperation(e.key);
+                     break;
+
+
+                 case 'Enter':
+                 case '=':
+                     this.calc();
+                     break;
+
+                 case '.':
+                 case ',':
+                     this.addDot();
+                     break;
+
+                 case '0':
+                 case '1':
+                 case '2':
+                 case '3':
+                 case '4':
+                 case '5':
+                 case '6':
+                 case '7':
+                 case '8':
+                 case '9':
+                     this.addOperation(parseInt(e.key));
+                     break
+             }
+
+         });
      }
+
+
 
 
      addEventListenerAll(elements, events, fn) { //Método para cada elemento ter seu evento! Utilizando o Split,ele me retorna um Array
@@ -221,11 +264,11 @@
 
      }
 
-     addDot() {  //Metodo para adicionar o ponto na calculadora
+     addDot() { //Metodo para adicionar o ponto na calculadora
 
          let lastOperation = this.getLastOperation();
 
-         if(typeof lastOperation === 'string' && lastOperation.split('').indexOf('.') > -1) return;
+         if (typeof lastOperation === 'string' && lastOperation.split('').indexOf('.') > -1) return;
 
          if (isNaN(this.isOperation(lastOperation) || !lastOperation)) {
              this.pushOperation('0.');
