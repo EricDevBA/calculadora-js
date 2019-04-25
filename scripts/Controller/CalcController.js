@@ -2,6 +2,8 @@
 
      constructor() {
 
+         this._audio = new Audio('click.mp3');
+         this._audioOnOff = false;
          this._lastOperator = '';
          this._lastNumber = '';
          this._operation = [];
@@ -56,12 +58,39 @@
          this.setLastNumberToDisplay();
          this.pasteFromClipboard();
 
+         document.querySelectorAll('.btn-ac').forEach(btn=> {  //Ao dar um duplo no botão AC da calculadora
 
-     }
+              btn.addEventListener('dblclick', e=> { //Adicionando o evento de duplo clique
+                this.toggleAudio();
+
+              });    
+         });  
+         
+
+        }
+        
+        toggleAudio() {
+
+            this._audioOnOff = !this._audioOnOff;  //Verifica se o áudio esta ligado ou desligado
+        }
+
+        playAudio() {  //Método para tocar o áudio da calculadora
+
+            if(this._audioOnOff){
+
+                this._audio.currentTime = 0;
+                this._audio.play();
+
+            }
+
+        }
+        
 
      initKeyboard() { //Eventos do teclado
 
          document.addEventListener('keyup', e => {
+
+            this.playAudio();
 
              switch (e.key) {
                  case 'Escape':
@@ -108,8 +137,6 @@
                      if (event.ctrlKey)
                          this.copyToClipboard();
                      break;
-
-
 
 
              }
@@ -321,6 +348,9 @@
 
 
      execBtn(value) { //Tratamento dos botões da calculadora através dos switch cases
+
+        this.playAudio();
+
          switch (value) {
              case 'ac':
                  this.clearAll();
