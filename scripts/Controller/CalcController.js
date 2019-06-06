@@ -12,9 +12,9 @@
          this._dateEl = document.querySelector("#data");
          this._timeEl = document.querySelector("#hora");
          this._currentDate;
+         this.initialize();
          this.initButtonsEvents();
          this.initKeyboard();
-         this.initialize();
      }
 
 
@@ -471,6 +471,13 @@
      }
 
      set displayCalc(value) {
+
+        if (value.toString().length > 10) {
+            this.setError();
+            return false;
+
+        }
+
          this._displayCalcEl.innerHTML = value;
 
      }
