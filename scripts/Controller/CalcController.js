@@ -19,15 +19,15 @@
 
 
 
-     pasteFromClipboard() {  // Método para colar
+     pasteFromClipboard() { // Método para colar
 
-        document.addEventListener('paste', e=>{
+         document.addEventListener('paste', e => {
 
-            let text = e.clipboardData.getData('Text');
-            this.displayCalc = parseFloat(text);
-            console.log(text);
+             let text = e.clipboardData.getData('Text');
+             this.displayCalc = parseFloat(text);
+             console.log(text);
 
-        });
+         });
 
      }
 
@@ -43,7 +43,7 @@
 
 
      }
-     
+
 
      initialize() {
 
@@ -58,39 +58,39 @@
          this.setLastNumberToDisplay();
          this.pasteFromClipboard();
 
-         document.querySelectorAll('.btn-ac').forEach(btn=> {  //Ao dar um duplo no botão AC da calculadora
+         document.querySelectorAll('.btn-ac').forEach(btn => { //Ao dar um duplo no botão AC da calculadora
 
-              btn.addEventListener('dblclick', e=> { //Adicionando o evento de duplo clique
-                this.toggleAudio();
+             btn.addEventListener('dblclick', e => { //Adicionando o evento de duplo clique
+                 this.toggleAudio();
 
-              });    
-         });  
-         
+             });
+         });
 
-        }
-        
-        toggleAudio() {
 
-            this._audioOnOff = !this._audioOnOff;  //Verifica se o áudio esta ligado ou desligado
-        }
+     }
 
-        playAudio() {  //Método para tocar o áudio da calculadora
+     toggleAudio() {
 
-            if(this._audioOnOff){
+         this._audioOnOff = !this._audioOnOff; //Verifica se o áudio esta ligado ou desligado
+     }
 
-                this._audio.currentTime = 0;
-                this._audio.play();
+     playAudio() { //Método para tocar o áudio da calculadora
 
-            }
+         if (this._audioOnOff) {
 
-        }
-        
+             this._audio.currentTime = 0;
+             this._audio.play();
+
+         }
+
+     }
+
 
      initKeyboard() { //Eventos do teclado
 
          document.addEventListener('keyup', e => {
 
-            this.playAudio();
+             this.playAudio();
 
              switch (e.key) {
                  case 'Escape':
@@ -202,7 +202,13 @@
 
      getResult() //Retorna o Eval da operação
      {
-         return eval(this._operation.join(""));
+         try {
+            return eval(this._operation.join(""));
+         } catch {
+            setTimeout(() => {
+                this.setError();
+            }, 1);
+         }
      }
 
      calc() {
@@ -349,7 +355,7 @@
 
      execBtn(value) { //Tratamento dos botões da calculadora através dos switch cases
 
-        this.playAudio();
+         this.playAudio();
 
          switch (value) {
              case 'ac':
@@ -472,11 +478,11 @@
 
      set displayCalc(value) {
 
-        if (value.toString().length > 10) {
-            this.setError();
-            return false;
+         if (value.toString().length > 10) {
+             this.setError();
+             return false;
 
-        }
+         }
 
          this._displayCalcEl.innerHTML = value;
 
